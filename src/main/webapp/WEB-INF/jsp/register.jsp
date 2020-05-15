@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+		<html>
 <head>
 <meta charset="UTF-8">
 <title>H+ Sport</title>
@@ -17,8 +18,8 @@
 				</div>
 				<!-- branding -->
 				<ul class="navbar">
-					<li><a href="">home</a></li>
-					<li><a href="">search</a></li>
+					<li><a href="/home">home</a></li>
+					<li><a href="/goToSearch">search</a></li>
 					<li><a href="">linkedIn</a></li>
 
 				</ul>
@@ -40,25 +41,23 @@
 	<section id="registration" class="section">
 	 <div class="container tagline">
 	 <em>Register User</em><br/>
-    		 <form method="post" action="#" >
-    			<label>Username</label> <input name="username" type="text" /><br/>
-    			<label>Password</label> <input name="password" type="password" /><br/>
-    			<label>First Name</label> <input name="firstName" type="text" /><br/>
-    			<label>Last Name</label> <input name="lastName" type="text" /><br/>
+    		 <form:form method="post" action="/registeruser" modelAttribute="newuser">
+    			<label>Username</label> <form:input path="userName" type="text" /><form:errors path="userName" cssClass="error"/> <br/>
+    			<label>Password</label> <form:input path="password" type="password" /><form:errors path="password" cssClass="error"/><br/>
+    			<label>First Name</label> <form:input path="firstName" type="text" /><form:errors path="firstName" cssClass="error"/><br/>
+    			<label>Last Name</label> <form:input path="lastName" type="text" /><br/>
     			<label>What do you want to do? </label> 
-				<input type="radio" name="activity" id="activity" value="Playing a sport">Play a Sport?
-				<input type="radio" name="activity" id="activity" value="Exercise in Gym">Hit the Gym?<br/>
-    			<label>Date of birth</label>
-    			<input name="dateOfBirth" type="date" /><br/>
+				<form:radiobutton  path="activity" id="activity" value="sport"/>Play a Sport?
+				<form:radiobutton path="activity" id="activity" value="Gym"/>Hit the Gym?<br/>
+                 <form:errors path="activity" cssClass="error" />
+
+                 <label>Date of birth</label>
+    			<form:input path="dateOfBirth" type="date" /><form:errors path="dateOfBirth" cssClass="error" /><br/>
     			<label>Gender</label>
-    			<select>
-					<option value="Male">Male</option>
-					<option value="Female">Female</option>
-					<option value="Other">Other</option>
-			
-				</select><br/>
+		 <form:select path="gender" items="${genderItems}"/>
+    		<br/>
     			<input type="submit" value="Submit" id="submit">
-    		</form>
+    		</form:form>
 		</div>
 	</section>
 	<footer class="footer">
